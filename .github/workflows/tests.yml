@@ -11,6 +11,6 @@ jobs:
           with:
             ruby-version: '3.3' # Not needed with a .ruby-version file
             bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-        - run: bundle install --no-doc
+        - run: bundle install
         - run: bundle exec bin/rails test
     
