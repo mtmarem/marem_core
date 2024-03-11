@@ -7,5 +7,5 @@ jobs:
     environment: testing
     steps:
       - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🎉 This is an env var ${{ vars.PSQL_PORT }} event."
+      - run: echo "🎉 This is an env var ${{ vars.PSQL_PORT }} -- {{ secrets.MYSQL_PORT }} event."
       - run: echo "🍏 This job's status is ${{ job.status }}."
