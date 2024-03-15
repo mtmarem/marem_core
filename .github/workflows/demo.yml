@@ -19,7 +19,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} '
           cd /home/ec2-user/marem_tours_application &&
-          git clone git@github.com:mtmarem/marem_core.git
+          GIT_SSH_COMMAND="ssh -i /home/ec2-user/.ssh/demo-aws" git clone git@github.com:mtmarem/marem_core.git
           '
       # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
       # - run: echo "🎉 This is an env var ${{ vars.PSQL_PORT }} -- ${{ env.db_porta }} event."
