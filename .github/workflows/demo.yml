@@ -8,6 +8,14 @@ jobs:
     env:
       db_porta: ${{secrets.MYSQL_PORT}}
     steps:
+      - name: Try aws-cli
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-north-1
+      - name: List Instances
+        run: aws ec2 describe-instances
       - name: Install SSH Key
         uses: shimataro/ssh-key-action@v2
         with:
