@@ -17,7 +17,7 @@ jobs:
         run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Run SSH 
         run: |
-          ssh -o StrictHostKeyChecking=no ${secrets.SSH_USER}@${secrets.SSH_HOST} '
+          ssh -o StrictHostKeyChecking=no ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}} '
           cd /home/ec2-user/marem_tours_application &&
           git clone git@github.com:mtmarem/marem_core.git
           '
