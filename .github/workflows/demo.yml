@@ -8,6 +8,18 @@ jobs:
     env:
       db_porta: ${{secrets.MYSQL_PORT}}
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🎉 This is an env var ${{ vars.PSQL_PORT }} -- ${{ env.db_porta }} event."
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Run SSH 
+        run: |
+          ssh -o StrictHostKeyChecking=no ${secrets.SSH_USER}@${secrets.SSH_HOST} '
+          cd /home/ec2-user/marem_tours_application &&
+          git clone git@github.com:mtmarem/marem_core.git
+          '
+      # - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      # - run: echo "🎉 This is an env var ${{ vars.PSQL_PORT }} -- ${{ env.db_porta }} event."
       - run: echo "🍏 This job's status is ${{ job.status }}."
